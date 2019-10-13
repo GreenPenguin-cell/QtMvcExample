@@ -142,16 +142,12 @@ Window {
                         width: 1
                     }
 
-//                    Text {
-//                        anchors.centerIn: parent
-//                        renderType: Text.NativeRendering
-//                        text:model.CommandNameRole+" "+model.CommandAliasRole    //text: "%1%2".arg(model.text).arg(isCurrent ? " *" : "")
-//                    }
+
 
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {view.currentIndex = model.index
-                            txt_dop.text = model.DopRole
+
                         }
                     }
                 }

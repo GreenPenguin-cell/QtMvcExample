@@ -27,8 +27,6 @@ QVariant TestModel::data(const QModelIndex &index, int role) const
         return m_data.at(index.row()).name;// QVariant(index.row() < 2 ? "orange" : "skyblue");
     case CommandAliasRole:
         return m_data.at(index.row()).alias;
-    case DopRole:
-        return m_data.at(index.row()).dop;
     default:
         return QVariant();
     }
@@ -39,15 +37,14 @@ QHash<int, QByteArray> TestModel::roleNames() const
     QHash<int, QByteArray> roles = QAbstractListModel::roleNames();
     roles[CommandNameRole] = "CommandNameRole";
     roles[CommandAliasRole] = "CommandAliasRole";
-    roles[DopRole] = "DopRole";
 
     return roles;
 }
 
-void TestModel::add(QString command, QString command_alias, QString dop)
+void TestModel::add(QString command, QString alias)
 {
     beginInsertRows(QModelIndex(), m_data.size(), m_data.size());
-    Command com(command,command_alias, dop);
+    Command com(command,alias);
     m_data.append(com);
     endInsertRows();
 
@@ -70,7 +67,7 @@ void TestModel::change(int  index_row, QString command_value, QString alias_valu
     removeRow(index_row, QModelIndex());
 
     beginInsertRows(QModelIndex(), index_row, index_row);
-    Command com(command_value,alias_value, "lol");
+    Command com(command_value,alias_value);
     m_data.insert(index_row, com);
     endInsertRows();
     QModelIndex index = createIndex(0, 0, static_cast<void *>(0));

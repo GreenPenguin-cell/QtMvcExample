@@ -12,20 +12,17 @@ class TestModel : public QAbstractListModel
 public:
     struct Command
     {
-        Command(QString name, QString alias, QString dop = "none") {
+        Command(QString name, QString alias) {
             this->alias = alias;
             this->name = name;
-            this->dop = dop;
         }
         QString name;
         QString alias;
-        QString dop;
     };
 
     enum Roles {
         CommandNameRole = Qt::UserRole + 1,
-        CommandAliasRole = Qt::UserRole + 2,
-        DopRole
+        CommandAliasRole
     };
 
     TestModel(QObject *parent = 0);
@@ -37,7 +34,7 @@ public:
     Q_INVOKABLE virtual bool setData(const QModelIndex &index, const QVariant &value, int role);
     virtual Qt::ItemFlags flags(const QModelIndex &index) const;
 
-    Q_INVOKABLE void add(QString command, QString command_alias, QString dop = "lal");
+    Q_INVOKABLE void add(QString command, QString alias);
     Q_INVOKABLE virtual bool removeRow(int row, const QModelIndex &parent);
     Q_INVOKABLE void change(int  index_row, QString command_value, QString alias_value);
 
