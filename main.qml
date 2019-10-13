@@ -47,6 +47,7 @@ Window {
         id:rec_view
         width: parent.width/1.4
         height: parent.height/1.4
+
         ListView {
             id: view
 
@@ -56,7 +57,40 @@ Window {
             model: dataModel
             clip: true
 
+            header: Rectangle {
+                width: view.width
+                height: 40
+                border {
+                    color: "black"
+                    width: 1
+                }
 
+                Rectangle
+                {
+                    id:rec_header_splitter
+                    x:parent.width/2
+                    y:0
+                    width: 1
+                    height: parent.height
+                    color: "black"
+                }
+                Text
+                {
+                    id:txt_command_header
+                    x:0
+                    y:1
+                    renderType: Text.NativeRendering
+                    text:"Команда"
+                }
+                Text
+                {
+                    id:txt_alias_header
+                    x:parent.width/2+1
+                    y:1
+                    renderType: Text.NativeRendering
+                    text:"Ключевое название"
+                }
+            }
             highlight: Rectangle {
                 color: "skyblue"
             }
@@ -75,18 +109,44 @@ Window {
                     id:rec_view_componenet
                     anchors.margins: 5
                     anchors.fill: parent
-                    radius: height / 2
+                   // radius: height / 2
+                    Rectangle
+                    {
+                        id:rec_splitter
+                        x:parent.width/2
+                        y:0
+                        width: 1
+                        height: parent.height
+                        color: "black"
+                    }
+                    Text
+                    {
+                        id:txt_command
+                        x:0
+                        y:1
+                        renderType: Text.NativeRendering
+                        text:model.CommandNameRole
+                    }
+                    Text
+                    {
+                        id:txt_alias
+                        x:parent.width/2+1
+                        y:1
+                        renderType: Text.NativeRendering
+                        text:model.CommandAliasRole
+                    }
+
                     color: "white"//model.color
                     border {
                         color: "black"
                         width: 1
                     }
 
-                    Text {
-                        anchors.centerIn: parent
-                        renderType: Text.NativeRendering
-                        text:model.CommandNameRole+" "+model.CommandAliasRole    //text: "%1%2".arg(model.text).arg(isCurrent ? " *" : "")
-                    }
+//                    Text {
+//                        anchors.centerIn: parent
+//                        renderType: Text.NativeRendering
+//                        text:model.CommandNameRole+" "+model.CommandAliasRole    //text: "%1%2".arg(model.text).arg(isCurrent ? " *" : "")
+//                    }
 
                     MouseArea {
                         anchors.fill: parent
